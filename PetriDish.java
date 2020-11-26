@@ -36,7 +36,7 @@ public class PetriDish{
             CellMoveToggleChild child = new
               CellMoveToggleChild(row, col, mass);
           }
-          dish[row][col] = Cell(row, col, mass);
+          //dish[row][col] = Cell(row, col, mass);
         }
         else{
           dish[row][col] = null;
