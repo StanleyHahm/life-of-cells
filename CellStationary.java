@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CellStationary extends Cell{
   public CellStationary(int currRow, int currCol, int mass){
@@ -6,9 +6,7 @@ public class CellStationary extends Cell{
   }
 
   public CellStationary(CellStationary otherCellStationary){
-    currRow = otherCellStationary.currRow;
-    currCol = otherCellStationary.currCol;
-    mass = otherCellStationary.mass;
+    super(otherCellStationary);
   }
 
   public String toString(){

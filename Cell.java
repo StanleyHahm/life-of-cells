@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public abstract class Cell{
   public int currRow;

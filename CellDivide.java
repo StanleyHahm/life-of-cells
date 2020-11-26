@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CellDivide extends Cell{
   public int direction;
@@ -9,9 +9,7 @@ public class CellDivide extends Cell{
   }
 
   public CellDivide(CellDivide otherCellDivide){
-    currRow = otherCellDivide.currRow;
-    currCol = otherCellDivide.currCol;
-    mass = otherCellDivide.mass;
+    super(otherCellDivide);
   }
 
   public String toString(){
@@ -26,4 +24,5 @@ public class CellDivide extends Cell{
       return false;
     }
   }
+
 }

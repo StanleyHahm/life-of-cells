@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CellMoveUp extends Cell{
   public CellMoveUp(int currRow, int currCol, int mass){
@@ -6,7 +6,7 @@ public class CellMoveUp extends Cell{
   }
 
   public CellMoveUp(CellMoveUp otherCellMoveUp){
-    super.(otherCellMoveUp);
+    super(otherCellMoveUp);
   }
 
   public String toString(){

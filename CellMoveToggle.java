@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CellMoveToggle extends CellMoveUp{
   public boolean toggled;
@@ -9,9 +9,7 @@ public class CellMoveToggle extends CellMoveUp{
   }
 
   public CellMoveToggle(CellMoveToggle otherCellMoveToggle){
-    currRow = otherCellMoveToggle.currRow;
-    currCol = otherCellMoveToggle.currCol;
-    mass = otherCellMoveToggle.mass;
+    super(otherCellMoveToggle);
   }
 
   public String toString(){

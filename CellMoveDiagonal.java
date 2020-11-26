@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CellMoveDiagonal extends CellMoveUp{
   public boolean orientedRight;
@@ -11,9 +11,7 @@ public class CellMoveDiagonal extends CellMoveUp{
   }
 
   public CellMoveDiagonal(CellMoveDiagonal otherCellMoveDiagonal){
-    currRow = otherCellMoveDiagonal.currRow;
-    currCol = otherCellMoveDiagonal.currCol;
-    mass = otherCellMoveDiagonal.mass;
+    super(otherCellMoveDiagonal);
   }
 
   public String toString(){

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CellMoveToggleChild extends CellMoveToggle{
   public static int numAlive;
