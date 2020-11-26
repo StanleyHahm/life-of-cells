@@ -42,8 +42,12 @@ public abstract class Cell{
     return mass;
   }
 
-//WHAT AM I SUPPOSED TO DO WITH THIS METHOD??
-  public abstract boolean checkApoptosis(List<Cell> neighbors){
+  public abstract boolean checkApoptosis(List<Cell> neighbors);
+
+/**
+  public void main(String[] args){
 
   }
+
+  */
 }

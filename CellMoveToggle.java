@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 
-public class CellMoveToggle extends Cell{
+public class CellMoveToggle extends CellMoveUp{
   public boolean toggled;
 
   public CellMoveToggle(int currRow, int currCol, int mass){
-    this.currRow = currRow;
-    this.currCol = currCol;
-    this.mass = mass;
+    super(currRow, currCol, mass);
     toggled = true;
   }
 

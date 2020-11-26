@@ -1,13 +1,11 @@
 import java.util.ArrayList;
 
-public class CellMoveDiagonal extends Cell{
+public class CellMoveDiagonal extends CellMoveUp{
   public boolean orientedRight;
   public int diagonalMoves;
 
   public CellMoveDiagonal(int currRow, int currCol, int mass){
-    this.currRow = currRow;
-    this.currCol = currCol;
-    this.mass = mass;
+    super(currRow, currCol, mass);
     orientedRight = true;
     diagonalMoves = 0;
   }

@@ -2,15 +2,11 @@ import java.util.ArrayList;
 
 public class CellMoveUp extends Cell{
   public CellMoveUp(int currRow, int currCol, int mass){
-    this.currRow = currRow;
-    this.currCol = currCol;
-    this.mass = mass;
+    super(currRow, currCol, mass);
   }
 
   public CellMoveUp(CellMoveUp otherCellMoveUp){
-    currRow = otherCellMoveUp.currRow;
-    currCol = otherCellMoveUp.currCol;
-    mass = otherCellMoveUp.mass;
+    super.(otherCellMoveUp);
   }
 
   public String toString(){

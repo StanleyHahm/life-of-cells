@@ -4,9 +4,7 @@ public class CellDivide extends Cell{
   public int direction;
 
   public CellDivide(int currRow, int currCol, int mass){
-    this.currRow = currRow;
-    this.currCol = currCol;
-    this.mass = mass;
+    super(currRow, currCol, mass);
     this.direction = 1;
   }
 

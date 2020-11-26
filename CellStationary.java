@@ -2,9 +2,7 @@ import java.util.ArrayList;
 
 public class CellStationary extends Cell{
   public CellStationary(int currRow, int currCol, int mass){
-    this.currRow = currRow;
-    this.currCol = currCol;
-    this.mass = mass;
+    super(currRow, currCol, mass);
   }
 
   public CellStationary(CellStationary otherCellStationary){
