@@ -48,9 +48,12 @@ public abstract class Cell{
   *  @param otherCell this is the variable that stems from Cell.java
   */
   public Cell(Cell otherCell){
-    currRow = otherCell.currRow;
-    currCol = otherCell.currCol;
-    mass = otherCell.mass;
+    if((otherCell.currRow >= 0) && (otherCell.currCol >= 0)
+      &&(otherCell.mass >= 0)){
+      currRow = otherCell.currRow;
+      currCol = otherCell.currCol;
+      mass = otherCell.mass;
+    }
   }
 
   /**
