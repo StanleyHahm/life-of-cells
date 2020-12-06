@@ -32,7 +32,7 @@ public class PetriDish{
     for(int row = 0; row < board.length; row++){
       for(int col = 0; col < board[row].length; col++){
         //checks if the element is null or not
-        if(board[row][col] != "null"){
+        if(board[row][col] != null){
           str = board[row][col];
           split_str = str.split(" ", 0);
           cellType = split_str[0];
