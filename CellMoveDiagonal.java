@@ -41,6 +41,8 @@ public class CellMoveDiagonal extends CellMoveUp{
   */
   public CellMoveDiagonal(CellMoveDiagonal otherCellMoveDiagonal){
     super(otherCellMoveDiagonal);
+    orientedRight = true;
+    diagonalMoves = 0;
   }
 
   /**
