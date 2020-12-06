@@ -65,10 +65,10 @@ public class CellMoveToggle extends CellMoveUp{
   */
   public boolean checkApoptosis(List<Cell> neighbors){
     if((neighbors.size() < 2) || (neighbors.size() > 5)){
-      return false;
+      return true;
     }
     else{
-      return true;
+      return false;
     }
   }
 }

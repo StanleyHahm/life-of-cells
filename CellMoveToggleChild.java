@@ -60,7 +60,7 @@ public class CellMoveToggleChild extends CellMoveToggle{
   */
   public boolean checkApoptosis(List<Cell> neighbors){
     if((super.checkApoptosis(neighbors) == true)
-      && (neighbors.size() < 10)){
+      && (numAlive < 10)){
       return true;
     }
     else{
