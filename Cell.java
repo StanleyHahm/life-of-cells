@@ -29,14 +29,20 @@ public abstract class Cell{
   *  @param mass the mass of cell
   */
   public Cell(int currRow, int currCol, int mass){
-    if((currRow >= 0) && (currCol >= 0) && (mass >= 0)){
-      this.currRow = currRow;
-      this.currCol = currCol;
-      this.mass = mass;
-    }
-    else{
+    //initalize all instance variables w/ values in parameter
+    this.currRow = currRow;
+    this.currCol = currCol;
+    this.mass = mass;
+
+    //if the parameters are invalid, then set appropriate
+    //instance variable to 0
+    if(currRow < 0){
       this.currRow = 0;
+    }
+    if (currCol < 0){
       this.currCol = 0;
+    } 
+    if (mass < 0){
       this.mass = 0;
     }
   }
