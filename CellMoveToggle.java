@@ -40,7 +40,6 @@ public class CellMoveToggle extends CellMoveUp{
   */
   public CellMoveToggle(CellMoveToggle otherCellMoveToggle){
     super(otherCellMoveToggle);
-    toggled = true;
   }
 
   /**

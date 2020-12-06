@@ -40,7 +40,6 @@ public class CellDivide extends Cell{
   */
   public CellDivide(CellDivide otherCellDivide){
     super(otherCellDivide);
-    this.direction = 1;
   }
 
   /**
