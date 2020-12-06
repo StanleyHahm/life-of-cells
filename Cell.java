@@ -29,7 +29,7 @@ public abstract class Cell{
   *  @param mass the mass of cell
   */
   public Cell(int currRow, int currCol, int mass){
-    if((currRow >= 0) && (currCol >= 0) && (mass >= 0)){
+    if((currRow > 0) && (currCol > 0) && (mass > 0)){
       this.currRow = currRow;
       this.currCol = currCol;
       this.mass = mass;
