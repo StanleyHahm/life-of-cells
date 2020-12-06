@@ -29,6 +29,7 @@ public class PetriDish{
     int mass;
     String str;
     String[] split_str;
+    dish = new Cell[board.length][board[0].length];
     for(int row = 0; row < board.length; row++){
       for(int col = 0; col < board[0].length; col++){
         //checks if the element is null or not
@@ -36,26 +37,26 @@ public class PetriDish{
           str = board[row][col];
           split_str = str.split(" ", 0);
           cellType = split_str[0];
-          System.out.println(cellType);
           mass = Integer.parseInt(split_str[1]);
           //checks cellTypes and sets new variables to that
           //cell type
-          if(cellType == "CellStationary"){
+          if(cellType.equals("CellStationary")){
             dish[row][col] = new CellStationary(row, col, mass);
           }
-          if(cellType == "CellMoveUp"){
+          if(cellType.equals("CellMoveUp")){
+            System.out.println("It works!");
             dish[row][col] = new CellMoveUp(row, col, mass);
           }
-          if(cellType == "CellDivide"){
+          if(cellType.equals("CellDivide")){
             dish[row][col] = new CellDivide(row, col, mass);
           }
-          if(cellType == "CellMoveToggle"){
+          if(cellType.equals("CellMoveToggle")){
             dish[row][col] = new CellMoveToggle(row, col, mass);
           }
-          if(cellType == "CellMoveDiagonal"){
+          if(cellType.equals("CellMoveDiagonal")){
             dish[row][col] = new CellMoveDiagonal(row, col, mass);
           }
-          if(cellType == "CellMoveToggleChild"){
+          if(cellType.equals("CellMoveToggleChild")){
             dish[row][col] = new CellMoveToggleChild(row, col, mass);
           }
         }
@@ -64,6 +65,12 @@ public class PetriDish{
         }
       }
     }
+    System.out.println(Arrays.deepToString(dish));
+  }
 
+  public static void main (String args[]){
+    String[][] petri = new String[][]{ {"CellMoveUp 0", "CellMoveToggle 1", "CellMoveToggleChild 2", "null"},
+{"CellMoveDiagonal 3", "CellDivide 4", "CellMoveToggle 5", "null"}};
+    PetriDish petriTest = new PetriDish(petri);
   }
 }
