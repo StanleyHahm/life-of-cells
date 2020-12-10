@@ -15,7 +15,7 @@ import java.util.*;
 *  instance variables of the super class. It will also check if
 *  the cell needs to apoptosis or not.
 */
-public class CellDivide extends Cell{
+public class CellDivide extends Cell implements Divisible{
   public int direction;
 
   /**
@@ -66,4 +66,31 @@ public class CellDivide extends Cell{
     }
   }
 
+  /**
+  *  uses copy constructor to make a deep copy of the object
+  *
+  *  @return copy gives deep copy of calling object
+  */
+  public Cell newCellCopy(){
+    Cell copy = new CellDivide(this);
+    return copy;
+  }
+
+  public int[] getDivision(){
+    int[] spawnPosition = new int[2];
+    if(direction == 0){
+      spawnPosition[0] -= 1;
+    }
+    if(direction ==1){
+      spawnPosition[0] += 1;
+    }
+    if(direction == 2){
+      spawnPosition[1] -= 1;
+    }
+    if(direction == 3){
+      spawnPosition[0] += 1;
+    }
+
+    return spawnPosition;
+  }
 }

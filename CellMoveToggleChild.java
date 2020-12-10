@@ -68,4 +68,13 @@ public class CellMoveToggleChild extends CellMoveToggle{
     }
   }
 
+  /**
+  *  uses copy constructor to make a deep copy of the object
+  *
+  *  @return copy gives deep copy of calling object
+  */
+  public Cell newCellCopy(){
+    Cell copy = new CellMoveToggleChild(this);
+    return copy;
+  }
 }

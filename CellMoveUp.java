@@ -15,7 +15,7 @@ import java.util.*;
 *  instance variables of the super class. It will also check if
 *  the cell needs to apoptosis or not.
 */
-public class CellMoveUp extends Cell{
+public class CellMoveUp extends Cell implements Movable{
   /**
   *  Sets parameters to parent class Cell.java.
   *
@@ -59,5 +59,22 @@ public class CellMoveUp extends Cell{
     else{
       return false;
     }
+  }
+
+  /**
+  *  uses copy constructor to make a deep copy of the object
+  *
+  *  @return copy gives deep copy of calling object
+  */
+  public Cell newCellCopy(){
+    Cell copy = new CellMoveUp(this);
+    return copy;
+  }
+
+
+  public int[] getMove(){
+    int[] newPosition = new int[2];
+    newPosition[0] += 1;
+    return newPosition;
   }
 }

@@ -15,7 +15,7 @@ import java.util.*;
 *  instance variables. It will also check if the cell needs to
 *  apoptosis or not.
 */
-public abstract class Cell{
+public abstract class Cell implements Comparable<Cell>{
   public int currRow;
   public int currCol;
   public int mass;
@@ -41,7 +41,7 @@ public abstract class Cell{
     }
     if (currCol < 0){
       this.currCol = 0;
-    } 
+    }
     if (mass < 0){
       this.mass = 0;
     }
@@ -74,7 +74,7 @@ public abstract class Cell{
   /**
   *  gives back current row
   *
-  *  @return gives back the current row of cell
+  *  @return currRow gives back the current row of cell
   */
   public int getCurrRow(){
     return currRow;
@@ -83,7 +83,7 @@ public abstract class Cell{
   /**
   *  gives back current column
   *
-  *  @return gives back the current column of cell
+  *  @return currCol gives back the current column of cell
   */
   public int getCurrCol(){
     return currCol;
@@ -92,15 +92,24 @@ public abstract class Cell{
   /**
   *  gives back mass
   *
-  *  @return gives back the mass of cell
+  *  @return mass gives back the mass of cell
   */
   public int getMass(){
     return mass;
   }
 
   /**
-  *  Checks if the cells did apoptosis or not
+  *  Checks if the cells should do apoptosis or not
   */
   public abstract boolean checkApoptosis(List<Cell> neighbors);
 
+  /**
+  *  checks if mass of this cell is larger than that of otherCell
+  *
+  *  @return this.mass - otherCell.mass gives difference between
+  *  this mass and otherCell mass
+  */
+  public int compareTo(Cell otherCell){
+    return this.mass - otherCell.mass;
+  }
 }

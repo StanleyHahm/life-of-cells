@@ -71,4 +71,31 @@ public class CellMoveToggle extends CellMoveUp{
       return false;
     }
   }
+
+  /**
+  *  uses copy constructor to make a deep copy of the object
+  *
+  *  @return copy gives deep copy of calling object
+  */
+  public Cell newCellCopy(){
+    Cell copy = new CellMoveToggle(this);
+    return copy;
+  }
+
+  public int[] getMove(){
+    int[] newPosition = new int[2];
+
+    if(toggled == true){
+      newPosition[0] += 1;
+    }
+
+    if(toggled == true){
+      toggled = false;
+    }
+    else{
+      toggled = true;
+    }
+
+    return newPosition;
+  }
 }

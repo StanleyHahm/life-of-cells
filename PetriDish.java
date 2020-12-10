@@ -16,6 +16,8 @@ import java.util.*;
 public class PetriDish{
 
   public Cell[][] dish;
+  public List<Movable> movables;
+  public List<Divisible> divisibles;
 
   /**
   *  This is the constructor method that prints the board into
@@ -35,9 +37,12 @@ public class PetriDish{
         //checks if the element is null or not
         if(board[row][col] != "null"){
           str = board[row][col];
+
+          //splits the board element into cellType & mass
           split_str = str.split(" ", 0);
           cellType = split_str[0];
           mass = Integer.parseInt(split_str[1]);
+
           //checks cellTypes and sets new variables to that
           //cell type
           if(cellType.equals("CellStationary")){
@@ -65,12 +70,178 @@ public class PetriDish{
         }
       }
     }
-    System.out.println(Arrays.deepToString(dish));
   }
 
-  public static void main (String args[]){
-    String[][] petri = new String[][]{ {"CellMoveUp 0", "CellMoveToggle 1", "CellMoveToggleChild 2", "null"},
-{"CellMoveDiagonal 3", "CellDivide 4", "CellMoveToggle 5", "null"}};
-    PetriDish petriTest = new PetriDish(petri);
+  public List<Cell> getNeighborsOf(int row, int col){
+    ArrayList<Cell> neighbors = new ArrayList<Cell>();
+
+    int numRow = dish.length;
+    int numCol = dish[0].length;
+
+    if((row >= numRow) || (col >= numCol)){
+      return null;
+    }
+
+    //northwest
+    if(dish[(row-1) % numRow][(col-1) % numCol] != null){
+      neighbors.add(dish[(row-1) % numRow][(col-1) % numCol]);
+    }
+
+    //north
+    if(dish[(row-1) % numRow][(col)] != null){
+      neighbors.add(dish[(row-1) % numRow][col]);
+    }
+
+    //northeast
+    if(dish[(row-1) % numRow][(col+1) % numCol] !=  null){
+      neighbors.add(dish[(row-1) % numRow][(col+1) % numCol]);
+    }
+
+    //west
+    if(dish[row][(col-1) % numCol] != null){
+      neighbors.add(dish[row][(col-1) % numCol]);
+    }
+
+    //east
+    if(dish[row][(col+1) % numCol] != null){
+      neighbors.add(dish[row][(col+1) % numCol]);
+    }
+
+    //southwest
+    if(dish[(row+1) % numRow][(col-1) % numCol] != null){
+      neighbors.add(dish[(row+1) % numRow][(col-1) % numCol]);
+    }
+
+    //south
+    if(dish[(row+1) % numRow][col] != null){
+      neighbors.add(dish[(row-1) % numRow][col]);
+    }
+
+    //southeast
+    if(dish[(row+1) % numRow][(col+1) % numCol] != null){
+      neighbors.add(dish[(row+1) % numRow][(col+1) % numCol]);
+    }
+
+    return neighbors;
+  }
+
+  public void move(){
+    int[] newPosition;
+    for(int i = 0; i < movables.size(); i++){
+      newPosition = movables.get(i).getMove();
+
+      //if the row or column is negative, we wrap it around using
+      //dish row length or col length respectively
+      if(newPosition[0] < 0){
+        newPosition[0] += dish.length;
+      }
+      if(newPosition[1] < 0){
+        newPosition[1] += dish[0].length;
+      }
+
+      //if row or column is above the row or col length of dish, we
+      //wrap around using the modulo
+      if(newPosition[0] >= dish.length){
+        newPosition[0] %= dish.length;
+      }
+      if(newPosition[1] >= dish[0].length){
+        newPosition[1] %= dish[0].length;
+      }
+
+      //if there's nothing there, place the movable object there
+      if(dish[newPosition[0]][newPosition[1]] == null){
+        dish[newPosition[0]][newPosition[1]] = movables.get(i);
+      }
+
+      //if there's a non-movable object there, kill it
+      if((!(dish[newPosition[0]][newPosition[1]] instanceof Movable))
+      && (dish[newPosition[0]][newPosition[1]] != null)){
+
+        dish[newPosition[0]][newPosition[1]] = movables.get(i);
+      }
+      //if movable object is there, then check which one has bigger mass
+      //the smaller mass object dies
+      if(dish[newPosition[0]][newPosition[1]] instanceof Movable){
+        if(movables.get(i).mass >
+          dish[newPosition[0]][newPosition[1]].mass){
+          dish[newPosition[0]][newPosition[1]].apoptosis();
+          dish[newPosition[0]][newPosition[1]] = movables.get(i);
+        }
+      //if both movables equal each other, kill both
+        else if(movables.get(i).mass ==
+          dish[newPosition[0]][newPosition[1]].mass){
+          dish[newPosition[0]][newPosition[1]].apoptosis();
+          movables.get(i).apoptosis();
+          dish[newPosition[0]][newPosition[1]] = null;
+        }
+      }
+    }
+
+
+  }
+
+  public void divide(){
+    int[] spawnPosition;
+    for(int i = 0; i < divisibles.size(); i++){
+      spawnPosition = divisibles.get(i).getDivision();
+
+      //if the row or column is negative, we wrap it around using
+      //dish row length or col length respectively
+      if(spawnPosition[0] < 0){
+        spawnPosition[0] += dish.length;
+      }
+      if(spawnPosition[1] < 0){
+        spawnPosition[1] += dish[0].length;
+      }
+
+      //if row or column is above the row or col length of dish, we
+      //wrap around using the modulo
+      if(spawnPosition[0] >= dish.length){
+        spawnPosition[0] %= dish.length;
+      }
+      if(spawnPosition[1] >= dish[0].length){
+        spawnPosition[1] %= dish[0].length;
+      }
+
+      if(dish[spawnPosition[0]][spawnPosition[1]] == null){
+        dish[spawnPosition[0]][spawnPosition[1]] = divisibles.get(i);
+      }
+      if(dish[spawnPosition[0]][spawnPosition[1]] instanceof Divisible){
+        if(divisibles.get(i).mass >
+          dish[spawnPosition[0]][spawnPosition[1]].mass){
+          dish[spawnPosition[0]][spawnPosition[1]].apoptosis();
+          dish[spawnPosition[0]][spawnPosition[1]] = divisibles.get(i);
+        }
+        else if(divisibles.get(i).mass ==
+          dish[spawnPosition[0]][spawnPosition[1]].mass){
+          dish[spawnPosition[0]][spawnPosition[1]].apoptosis();
+          divisibles.get(i).apoptosis();
+          dish[spawnPosition[0]][spawnPosition[1]] = null;
+        }
+      }
+    }
+  }
+
+  public void update(){
+    ArrayList<Cell> neighbors = new ArrayList<Cell>();
+    for(int row; row < dish.length; row++){
+      for(int col; col < dish[row].length; col++){
+        neighbors = getNeighborsOf(row, col);
+        if(dish[row][col].checkApoptosis(neighbors) == true){
+          dish[row][col].apoptosis();
+          dish[row][col] = null;
+        }
+        if((dish[row][col] == null)
+          && (neighbors.size() >= 2) && (neighbors.size() <= 3)){
+          dish[row][col] = neighbors.get(0).newCellCopy();
+        }
+      }
+    }
+  }
+
+  public void iterate(){
+    move();
+    divide();
+    update();
   }
 }

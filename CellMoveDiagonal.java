@@ -73,4 +73,39 @@ public class CellMoveDiagonal extends CellMoveUp{
       return false;
     }
   }
+
+  /**
+  *  uses copy constructor to make a deep copy of the object
+  *
+  *  @return copy gives deep copy of calling object
+  */
+  public Cell newCellCopy(){
+    Cell copy = new CellMoveDiagonal(this);
+    return copy;
+  }
+
+  public int[] getMove(){
+    int[] newPosition = new int[2];
+
+    if(orientedRight == true){
+      newPosition[1] += 1;
+      newPosition[0] += 1;
+    }
+    else{
+      newPosition[1] -= 1;
+      newPosition[0] += 1;
+    }
+
+    diagonalMoves += 1;
+    if(diagonalMoves % 4 == 0){
+      if(orientedRight == true){
+        orientedRight = false;
+      }
+      else{
+        orientedRight = true;
+      }
+    }
+
+    return newPosition;
+  }
 }

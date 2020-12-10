@@ -61,4 +61,14 @@ public class CellStationary extends Cell{
       return false;
     }
   }
+
+  /**
+  *  uses copy constructor to make a deep copy of the object
+  *
+  *  @return copy gives deep copy of calling object
+  */
+  public Cell newCellCopy(){
+    Cell copy = new CellStationary(this);
+    return copy;
+  }
 }
