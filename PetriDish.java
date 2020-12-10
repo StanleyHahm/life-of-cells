@@ -73,7 +73,7 @@ public class PetriDish{
   }
 
   public List<Cell> getNeighborsOf(int row, int col){
-    ArrayList<Cell> neighbors = new ArrayList<Cell>();
+    List<Cell> neighbors = new ArrayList<Cell>();
 
     int numRow = dish.length;
     int numCol = dish[0].length;
@@ -150,29 +150,32 @@ public class PetriDish{
 
       //if there's nothing there, place the movable object there
       if(dish[newPosition[0]][newPosition[1]] == null){
-        dish[newPosition[0]][newPosition[1]] = movables.get(i);
+        dish[newPosition[0]][newPosition[1]] = (Cell)movables.get(i);
       }
 
       //if there's a non-movable object there, kill it
       if((!(dish[newPosition[0]][newPosition[1]] instanceof Movable))
       && (dish[newPosition[0]][newPosition[1]] != null)){
 
-        dish[newPosition[0]][newPosition[1]] = movables.get(i);
+        dish[newPosition[0]][newPosition[1]] = (Cell)movables.get(i);
       }
       //if movable object is there, then check which one has bigger mass
       //the smaller mass object dies
       if(dish[newPosition[0]][newPosition[1]] instanceof Movable){
-        if(movables.get(i).mass >
-          dish[newPosition[0]][newPosition[1]].mass){
+        if((dish[newPosition[0]]
+        [newPosition[1]].compareTo((Cell)movables.get(i))) < 0){
           dish[newPosition[0]][newPosition[1]].apoptosis();
-          dish[newPosition[0]][newPosition[1]] = movables.get(i);
+          dish[newPosition[0]][newPosition[1]] = (Cell)movables.get(i);
         }
       //if both movables equal each other, kill both
-        else if(movables.get(i).mass ==
-          dish[newPosition[0]][newPosition[1]].mass){
+        else if((dish[newPosition[0]]
+        [newPosition[1]].compareTo((Cell)movables.get(i))) == 0){
           dish[newPosition[0]][newPosition[1]].apoptosis();
-          movables.get(i).apoptosis();
+          movables.remove(i);
           dish[newPosition[0]][newPosition[1]] = null;
+        }
+        else{
+          movables.remove(i);
         }
       }
     }
@@ -204,28 +207,31 @@ public class PetriDish{
       }
 
       if(dish[spawnPosition[0]][spawnPosition[1]] == null){
-        dish[spawnPosition[0]][spawnPosition[1]] = divisibles.get(i);
+        dish[spawnPosition[0]][spawnPosition[1]] = (Cell)divisibles.get(i);
       }
       if(dish[spawnPosition[0]][spawnPosition[1]] instanceof Divisible){
-        if(divisibles.get(i).mass >
-          dish[spawnPosition[0]][spawnPosition[1]].mass){
+        if((dish[spawnPosition[0]]
+        [spawnPosition[1]].compareTo((Cell)divisibles.get(i)) < 0)){
           dish[spawnPosition[0]][spawnPosition[1]].apoptosis();
-          dish[spawnPosition[0]][spawnPosition[1]] = divisibles.get(i);
+          dish[spawnPosition[0]][spawnPosition[1]] = (Cell)divisibles.get(i);
         }
-        else if(divisibles.get(i).mass ==
-          dish[spawnPosition[0]][spawnPosition[1]].mass){
+        else if((dish[spawnPosition[0]]
+        [spawnPosition[1]].compareTo((Cell)divisibles.get(i)) == 0)){
           dish[spawnPosition[0]][spawnPosition[1]].apoptosis();
-          divisibles.get(i).apoptosis();
+          divisibles.remove(i);
           dish[spawnPosition[0]][spawnPosition[1]] = null;
+        }
+        else{
+          divisibles.remove(i);
         }
       }
     }
   }
 
   public void update(){
-    ArrayList<Cell> neighbors = new ArrayList<Cell>();
-    for(int row; row < dish.length; row++){
-      for(int col; col < dish[row].length; col++){
+    List<Cell> neighbors = new ArrayList<Cell>();
+    for(int row = 0; row < dish.length; row++){
+      for(int col = 0; col < dish[row].length; col++){
         neighbors = getNeighborsOf(row, col);
         if(dish[row][col].checkApoptosis(neighbors) == true){
           dish[row][col].apoptosis();
@@ -233,7 +239,7 @@ public class PetriDish{
         }
         if((dish[row][col] == null)
           && (neighbors.size() >= 2) && (neighbors.size() <= 3)){
-          dish[row][col] = neighbors.get(0).newCellCopy();
+          dish[row][col] = neighbors.get(0);
         }
       }
     }
