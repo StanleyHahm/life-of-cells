@@ -112,4 +112,9 @@ public abstract class Cell implements Comparable<Cell>{
   public int compareTo(Cell otherCell){
     return this.mass - otherCell.mass;
   }
+
+  /**
+  *  Makes copy of the respective cell
+  */
+  public abstract Cell newCellCopy();
 }

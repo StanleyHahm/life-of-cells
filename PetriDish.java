@@ -72,15 +72,27 @@ public class PetriDish{
     }
   }
 
+  /**
+  *  This gets the 8 surrounding neighbors of the cell that is in the
+  *  respective row & cell. Only gives back a list of non-null neighbors
+  *
+  *  @param row row of the target cell
+  *  @param cell cell of the target cell
+  *
+  *  @return neighbors a list of all non-null neighbors
+  */
   public List<Cell> getNeighborsOf(int row, int col){
     List<Cell> neighbors = new ArrayList<Cell>();
 
     int numRow = dish.length;
     int numCol = dish[0].length;
 
+    //checks if row & col are out of bounds
     if((row >= numRow) || (col >= numCol)){
       return null;
     }
+
+    //the modulos account for wrapping
 
     //northwest
     if(dish[(row-1) % numRow][(col-1) % numCol] != null){
@@ -125,6 +137,9 @@ public class PetriDish{
     return neighbors;
   }
 
+  /**
+  *  This moves the cells that are in the movables list.
+  */
   public void move(){
     int[] newPosition;
     for(int i = 0; i < movables.size(); i++){
@@ -174,6 +189,8 @@ public class PetriDish{
           movables.remove(i);
           dish[newPosition[0]][newPosition[1]] = null;
         }
+      //if the original cell is bigger, then delete the current cell from
+      //movables list
         else{
           movables.remove(i);
         }
@@ -183,6 +200,9 @@ public class PetriDish{
 
   }
 
+  /**
+  *  This spawns the twins of the cells that are in the divisbles list.
+  */
   public void divide(){
     int[] spawnPosition;
     for(int i = 0; i < divisibles.size(); i++){
@@ -209,18 +229,24 @@ public class PetriDish{
       if(dish[spawnPosition[0]][spawnPosition[1]] == null){
         dish[spawnPosition[0]][spawnPosition[1]] = (Cell)divisibles.get(i);
       }
+
+      //if divisible object is there, then check which one has bigger mass
+      //the smaller mass object dies
       if(dish[spawnPosition[0]][spawnPosition[1]] instanceof Divisible){
         if((dish[spawnPosition[0]]
         [spawnPosition[1]].compareTo((Cell)divisibles.get(i)) < 0)){
           dish[spawnPosition[0]][spawnPosition[1]].apoptosis();
           dish[spawnPosition[0]][spawnPosition[1]] = (Cell)divisibles.get(i);
         }
+        //if both divisbles equal each other, kill both
         else if((dish[spawnPosition[0]]
         [spawnPosition[1]].compareTo((Cell)divisibles.get(i)) == 0)){
           dish[spawnPosition[0]][spawnPosition[1]].apoptosis();
           divisibles.remove(i);
           dish[spawnPosition[0]][spawnPosition[1]] = null;
         }
+        //if the original cell is bigger, then delete the current cell from
+        //divisibles list
         else{
           divisibles.remove(i);
         }
@@ -228,6 +254,9 @@ public class PetriDish{
     }
   }
 
+  /**
+  *  This updates all the apoptosis of the cells in the dish 2d array
+  */
   public void update(){
     List<Cell> neighbors = new ArrayList<Cell>();
     for(int row = 0; row < dish.length; row++){
@@ -245,6 +274,9 @@ public class PetriDish{
     }
   }
 
+  /**
+  *  This repeats the moves over again for move, divide, & update
+  */
   public void iterate(){
     move();
     divide();

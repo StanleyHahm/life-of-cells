@@ -71,7 +71,11 @@ public class CellMoveUp extends Cell implements Movable{
     return copy;
   }
 
-
+  /**
+  *  utilizes Movable and moves the cell up
+  *
+  *  @return newPosition gives back the newPosition of the cell
+  */
   public int[] getMove(){
     int[] newPosition = new int[2];
     newPosition[0] += 1;

@@ -76,6 +76,12 @@ public class CellDivide extends Cell implements Divisible{
     return copy;
   }
 
+  /**
+  *  utilizes Divisible and creates the spawn of the new cell
+  *  depending on the direction
+  *
+  *  @return spawnPosition gives back the spawnPosition of the new cell
+  */
   public int[] getDivision(){
     int[] spawnPosition = new int[2];
     if(direction == 0){

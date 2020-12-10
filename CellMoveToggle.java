@@ -82,6 +82,11 @@ public class CellMoveToggle extends CellMoveUp{
     return copy;
   }
 
+  /**
+  *  utilizes Movable and moves the cell up and adjusts toggle
+  *
+  *  @return newPosition gives back the newPosition of the cell
+  */
   public int[] getMove(){
     int[] newPosition = new int[2];
 

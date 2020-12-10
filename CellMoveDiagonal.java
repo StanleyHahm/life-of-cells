@@ -84,6 +84,12 @@ public class CellMoveDiagonal extends CellMoveUp{
     return copy;
   }
 
+  /**
+  *  utilizes Movable and moves the cell diagonally depending on
+  *  orientedRight and changes direction every time
+  *
+  *  @return newPosition gives back the newPosition of the cell
+  */
   public int[] getMove(){
     int[] newPosition = new int[2];
 
